@@ -1,0 +1,155 @@
+<CombinedFitPlus>
+  <!-- This is a configurtion file for CombinedFitPlus -->
+  <!-- currently the order of MC samples is important and has to follow the ordering of blocks in matrices -->
+
+  <!-- fit_type can be either "Likelihood" or "Chi2" -->
+  <Config
+    verbosity        = "3"
+    output_path      = "fake_data/fake_nunubar_9.38_11.27_200_1point"
+    output_file_stem = "fake_nunubar_9.38_11.27_11" 
+    fit_type         = "Likelihood"
+  />
+
+  <FakeData number_of_experiments = "5000" random_seed="111" total_pot="9.38" 
+            add_fake_data_to_real_data="false">
+    <FakeParameter    name="dm2"        val="0.041091937" />
+    <FakeParameter    name="sin22theta" val="0.91774253" />
+  </FakeData>
+
+  <MC path="./input/nu10_nubar11.27">
+      <Sample name="Nue Signal" file="filtered_Neutrino_nueccqe_Likelihood_Final_Full_Dirtcut_0.hbk.root" ntuple="55" >
+          <WeightCalc name="POTWeightCalc" POT="9.38e20" n_mc_files="314022" pot_per_file="4.229E14" />
+          <WeightCalc name="OscWeightCalc" />
+          <Filter     name="Iflux filter" par="iflux" min="11" max="11" />
+      </Sample>
+      <Sample name="Nue MC" file="filtered_Neutrino_nueccqe_Likelihood_Final_Full_Dirtcut_0.hbk.root" ntuple="55" >
+          <WeightCalc name="POTWeightCalc" POT="9.38e20" n_mc_files="9396160" pot_per_file="4.372E14" />
+          <Filter     name="Iflux filter" par="iflux" min="14" max="14" />
+      </Sample>
+      <Sample name="Numu MC" file="filtered_Neutrino_numuccqe_Likelihood_Numu_CCQE_0.hbk.root" ntuple="56" >
+          <WeightCalc name="POTWeightCalc" POT="9.38e20" n_mc_files="9396160" pot_per_file="4.372E14" />
+      </Sample>
+      <Sample name="Nuebar Signal" file="filtered_AntiNeutrino_nueccqe_Likelihood_Final_Full_Dirtcut_0.hbk.root" ntuple="55" >
+          <WeightCalc name="POTWeightCalc" POT="11.27e20" n_mc_files="3000" pot_per_file="1.083e18" />
+          <WeightCalc name="OscWeightCalc" />
+          <Filter     name="Iflux filter" par="iflux" min="11" max="11" />
+      </Sample>
+      <Sample name="Nuebar MC" file="filtered_AntiNeutrino_nueccqe_Likelihood_Final_Full_Dirtcut_0.hbk.root" ntuple="55" >
+          <WeightCalc name="POTWeightCalc" POT="11.27e20" n_mc_files="5000" pot_per_file="5.58e18" />
+          <Filter     name="Iflux filter" par="iflux" min="14" max="14" />
+      </Sample>
+      <Sample name="Numubar MC" file="filtered_AntiNeutrino_numuccqe_Likelihood_Final_Full_Dirtcut.hbk.root" ntuple="56" >
+          <WeightCalc name="POTWeightCalc" POT="11.27e20" n_mc_files="5000" pot_per_file="5.58e18" />
+      </Sample>
+  </MC>
+
+  <Data path="./input/nu10_nubar11.27/">
+      <Sample name="Nue Data"  file="filtered_nueccqe_Likelihood_Final_Full_Dirtcut_9.38_eneryScaled.hbk.root"   ntuple="55" />
+      <Sample name="Numu Data" file="filtered_numuccqe_Likelihood_Final_Full_Dirtcut_9.38_eneryScaled.hbk.root"  ntuple="56" />
+      <Sample name="Nuebar Data"  file="data_nue_mar12.hbk.root"   ntuple="55" />
+      <Sample name="Numubar Data" file="data_numu_mar12.hbk.root"  ntuple="56" />
+  </Data>
+
+  <Matrices path="./input/nu10_nubar11.27/">
+    <Binning sample_name="Nue Signal" order="1" 
+             bins="0.200, 0.250, 0.300, 0.375, 0.475, 0.550, 0.600, 0.675, 0.750, 0.800, 0.950, 1.100, 1.150, 
+                   1.250, 1.300, 1.500, 1.700, 1.900, 3.000" />
+    <Binning sample_name="Nue MC"        order="2" 
+             bins="0.200, 0.250, 0.300, 0.375, 0.475, 0.550, 0.600, 0.675, 0.750, 0.800, 0.950, 1.100, 1.150, 
+                   1.250, 1.300, 1.500, 1.700, 1.900, 3.000" />
+    <Binning sample_name="Numu MC"       order="3" 
+             bins="0.0, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 3.0" />
+    <Binning sample_name="Nuebar Signal" order="4" 
+             bins="0.200, 0.250, 0.300, 0.375, 0.475, 0.550, 0.600, 0.675, 0.750, 0.800, 0.950, 1.100, 1.150, 
+                   1.250, 1.300, 1.500, 1.700, 1.900, 3.000" />
+    <Binning sample_name="Nuebar MC"        order="5" 
+             bins="0.200, 0.250, 0.300, 0.375, 0.475, 0.550, 0.600, 0.675, 0.750, 0.800, 0.950, 1.100, 1.150, 
+                   1.250, 1.300, 1.500, 1.700, 1.900, 3.000" />
+    <Binning sample_name="Numubar MC"       order="6" 
+             bins="0.0, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 3.0" />
+    <Matrix name="pipprodrawaboutsw"       file="pipprodrawaboutsw_matrix.root"       />
+    <Matrix name="pimprodrawaboutsw"       file="pimprodrawaboutsw_matrix.root"       />
+    <Matrix name="kpprod"                  file="kpprod_matrix.root"                  />
+    <Matrix name="kmprod"                  file="kmprod_matrix.root"                  />
+    <Matrix name="k0prod"                  file="k0prod_matrix.root"                  />
+    <Matrix name="beamunisims"             file="beamunisims_matrix.root"             />
+    <Matrix name="ccpiq2rewt"              file="ccpiq2rewt_matrix.root"              />
+    <Matrix name="dirt"                    file="dirt_matrix.root"                    />
+    <Matrix name="hadronic"                file="hadronic_matrix.root"                />
+    <Matrix name="mcunisims_smoothed"      file="mcunisims_smoothed_matrix.root"      />
+    <Matrix name="pi0yield_common_det"     file="pi0yield_common_det_matrix.root"     />
+    <Matrix name="pi0yield_statbkg"           file="pi0yield_statbkg_matrix.root"     />
+    <Matrix name="xsec"                    file="xsec_matrix.root"                    />
+    <Matrix name="opticalmodel"            file="opticalmodel_matrix.root"            />
+    <CorrectMSstat matrix="opticalmodel"          sample="Nue MC, Numu MC, Nuebar MC  ,     Numubar MC" 
+                                          ms_to_data_pot="     1.45201,  1.45201,       0.5384,         0.5384" />
+                                          <!-- neutrino mode is scaled by 6.46/9.38 -->
+    <AddStatError       opt="false" />
+    <AddMCStatError     opt="true" />
+    <AddSignalStatError opt="true" />
+  </Matrices>
+
+  <Rebin>
+   <!--  For E > 200 MeV fit, plotting histogram -->
+ <!--    <Sample name="Nue"     type="Data, MC, Signal" vec="1,  1,  2,  3,  4,  5,  5,  6,  6,  7,  8,  9,  9,  10, 10, 11, 11, 11" /> -->
+<!--     <Sample name="Nuebar"  type="Data, MC, Signal" vec="1,  1,  2,  3,  4,  5,  5,  6,  6,  7,  8,  9,  9,  10, 10, 11, 11, 11" /> -->
+
+   <!--  For E > 200 MeV fit, fit nu/nubar separately -->
+<!--     <Sample name="Nue"     type="Data, MC, Signal" vec="1,  1,  2,  3,  4,  5,  5,  6,  6,  7,  8,  9,  9,  -10, -10, -11, -11, -11" /> -->
+<!--     <Sample name="Nuebar"  type="Data, MC, Signal" vec="0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,   0,  0,  0,  0,  0" /> -->
+
+
+   <!--  chiSq published for E > 200 MeV, fit nu/nubar separately: move one 10 to 9-->
+    <Sample name="Nue"     type="Data, MC, Signal" vec="1,  1,  2,  3,  4,  5,  5,  6,  6,  7,  8,  9,  9,  9, -10, -11, -11, -11" />
+    <Sample name="Nuebar"  type="Data, MC, Signal" vec="1,  1,  2,  3,  4,  5,  5,  6,  6,  7,  8,  9,  9,  -10, -10, -11, -11, -11" />
+
+
+
+   <!--  1 bin 200-1250, for excess -->
+<!--     <Sample name="Nue"     type="Data, MC, Signal" vec="1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,   0,  0,  0,  0,  0" /> -->
+<!--     <Sample name="Nuebar"  type="Data, MC, Signal" vec="1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,   0,  0,  0,  0,  0" /> -->
+
+   <!--  For E > 200 MeV fit  -->
+    <!-- <Sample name="Nue"     type="Data, MC, Signal" vec="1,  1,  2,  3,  4,  5,  5,  6,  6,  7,  8,  9,  9,  10, 10, 11, 11, 11" /> -->
+    <!-- Sample name="Nue"     type="Data, MC, Signal" vec="1,  1,  2,  3,  4,  5,  5,  6,  6,  7,  8,  9,  9,  0, 0,  0,  0,  0" / -->
+    <!-- <Sample name="Nuebar"  type="Data, MC, Signal" vec="1,  1,  2,  3,  4,  5,  5,  6,  6,  7,  8,  9,  9,  10, 10, 11, 11, 11" /> -->
+ 
+    <!-- For E > 475 MeV fit  --> 
+    <!-- Sample name="Nue"  type="Data, MC, Signal" vec="0,  0,  0,  0,  1,  2,  2,  3,  3,  4,  5,  6,  6,  -7,  -7,  -8,  -8,  -8" / -->
+    <!-- Sample name="Nuebar"  type="Data, MC, Signal" vec="0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,   0,  0,  0,  0,  0" / -->
+
+    <!-- 1 bin 200-1250 --> 
+    <!-- Sample name="Nue"     type="Data, MC, Signal" vec="1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,   0,  0,  0,  0,  0" / -->
+    <!-- Sample name="Nue"     type="Data, MC, Signal" vec="1,  1,  1,  1,  2,  2,  2,  2,  2,  2,  2,  2,  2,   0,  0,  0,  0,  0" / -->
+    <!-- Sample name="Nuebar"     type="Data, MC, Signal" vec="1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,   0,  0,  0,  0,  0" / -->
+    <!-- Sample name="Nuebar"  type="Data, MC, Signal" vec="0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,   0,  0,  0,  0,  0" / -->
+  
+    <!-- 1 bin 200-3000 --> 
+   <!-- Sample name="Nue"     type="Data, MC, Signal" vec="1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,   1,  1,  1,  1,  1" / -->
+   <!-- Sample name="Nuebar"  type="Data, MC, Signal" vec="1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,   1,  1,  1,  1,  1" / -->
+
+    <!-- <Sample name="Numu"    type="Data, MC"         vec="-1,  -1,  -2,  -2,  -3,  -3,  -4,  -4,  -5,  -5,  -6,  -6,  -7,  -7,  -8,  -8,  0" /> -->
+    <!-- Sample name="Numu"    type="Data, MC"         vec=" 0,   0,   0,   0,   0,   0,   0,   0,  -1,  -1,  -2,  -2,  -3,  -3,  -4,  -4,  0" / -->
+    <!-- Sample name="Numubar" type="Data, MC"         vec=" 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  0" / -->
+    <!-- <Sample name="Numubar" type="Data, MC"         vec=" -1,   -1,  -2,  -2,  -3,  -3,  -4,  -4,  -5,  -5,  -6,  -6,  -7,  -7,  -8,  -8,  0" /> -->
+
+  <!--  For E > 200 MeV fit, plotting histogram & one bin excess -->
+<!--     <Sample name="Numu"    type="Data, MC"         vec="-1,  -1,  -2,  -2,  -3,  -3,  -4,  -4,  -5,  -5,  -6,  -6,  -7,  -7,  -8,  -8,  0" /> -->
+<!--     <Sample name="Numubar" type="Data, MC"         vec=" -1,   -1,  -2,  -2,  -3,  -3,  -4,  -4,  -5,  -5,  -6,  -6,  -7,  -7,  -8,  -8,  0" /> -->
+
+  <!--  For E > 200 MeV fit, fit nu/nubar separately -->
+    <Sample name="Numu"    type="Data, MC"         vec="-1,  -1,  -2,  -2,  -3,  -3,  -4,  -4,  -5,  -5,  -6,  -6,  -7,  -7,  -8,  -8,  0" />
+    <Sample name="Numubar" type="Data, MC"         vec="-1,  -1,  -2,  -2,  -3,  -3,  -4,  -4,  -5,  -5,  -6,  -6,  -7,  -7,  -8,  -8,  0" />
+
+ 
+
+  </Rebin>
+
+  <Algo name="Fit" >
+     <!-- more efficient if parameters that only scale signal are added last -->
+     <Option    name="do_raster"  val="false" />
+     <Option    name="dump_hists" val="false" />
+     <Parameter name="dm2"        min="0.01" max="100" nbins="190" logscale="true" />
+     <Parameter name="sin22theta" min="0.0003" max="1" nbins="190" logscale="true" />
+  </Algo>
+</CombinedFitPlus>
